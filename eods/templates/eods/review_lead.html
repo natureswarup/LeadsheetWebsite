@@ -1,0 +1,204 @@
+{% extends 'eods/base.html' %} {% block header %} {% endblock header %}
+{% block content %}
+
+<style>
+    input:focus {
+        background-color: rgba(224, 234, 248, 0.74);
+        outline-style: none;
+        outline-width: none;
+        border-style: none;
+        border: 1px solid black;
+    }
+
+    .review-header {
+        margin-top: 40px;
+    }
+
+    input:focus {
+        background-color: rgba(224, 234, 248, 0.74);
+        outline-style: none;
+        outline-width: none;
+        border-style: none;
+        border: 1px solid black;
+    }
+
+    .input-container1,
+    .input-container2 {
+        min-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+        justify-content: left !important;
+    }
+
+    .input-container2 {
+        margin-left: -50px;
+    }
+
+    .input-container1 p,
+    .input-container2 p {
+        position: relative;
+        min-width: 350px;
+        /* border: 1px solid black; */
+    }
+
+    .labels {
+        display: inline-block;
+        position: absolute;
+        left: 50px;
+    }
+
+    .input-container2 .labels {
+        display: inline-block;
+        position: absolute;
+        left: 70px;
+    }
+
+    .refund-note {
+        color: red;
+        text-align: left;
+        line-height: 20px;
+        width: 400px;
+    }
+
+    .TDC {
+        margin-left: -100px;
+    }
+</style>
+
+<p><a href="{% url 'eods:create_lead' office.id%}">Back</a></p>
+<div class="create-form">
+    <div class="container-fluid text-center review-header">
+        <h1 style="color: #0b88ff;">{{office}}</h1>
+        <br>
+
+        <h3 style="color: red;">REVIEW YOUR LEADSHEET!</h3>
+        <br>
+        {% if form.errors%}
+        <p style="color: red;">{{form.errors}}</p>
+        {%endif%}
+    </div>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <form action="/{{office.id}}/review_lead" method="post">
+                    {% csrf_token %}
+                    <p>Date: {{form.date_added}}</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="row text-right">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-4 input-container1">
+                <p><span class="labels">Cash:</span> {{form.cash}}</p>
+                <p><span class="labels">Electronic Chks:</span> {{form.electronic_checks}}</p>
+                <p><span class="labels">PNC Deposit:</span>{{form.pnc_deposit}}</p>
+                <p><span class="labels">Checks:</span>{{form.checks}}</p>
+                <p><span class="labels">CC Amex:</span>{{form.cc_amex}}</p>
+                <p><span class="labels">CC Discover:</span>{{form.cc_discover}}</p>
+                <p><span class="labels">CC Mastercard:</span>{{form.cc_mastercard}}</p>
+                <p><span class="labels">CC Visa:</span>{{form.cc_visa}}</p>
+                <p><span class="labels">CC Web:</span>{{form.web_cc}}</p>
+            </div>
+
+            <div class="col-md-4 input-container2">
+                <p><span class="labels">EFT: </span>{{form.eft}}</p>
+                <p><span class="labels">CareCredit: </span>{{form.care_credit}}</p>
+                <p><span class="labels">Lending Club: </span>{{form.lending_club}}</p>
+                <p><span class="labels">OrthoBanc: </span>{{form.orthobanc}}</p>
+                <p><span class="labels">Flips:</span> {{form.flips}}</p>
+                <p><span class="labels">Greensky: </span>{{form.greensky}}</p>
+                <p><span class="labels">Text to Pay: </span>{{form.text2pay}}</p>
+                <p><span class="labels">Other: </span>{{form.other}}</p>
+                <p class="refund-note"><span class="labels">Refunds: Must be processed by Accounting</span></p>
+                <br>
+                <br>
+            </div>
+
+        </div>
+        <div class="row text-center">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <p class="TDC">Total Daily Collections: {{form.total_daily_collections}}</p>
+
+                <p>Notes:</p>
+                <p>{{form.note}}</p>
+                <br />
+
+                <p>{{form.file_upload.as_hidden}}</p>
+                <button class="btn btn-primary btn-sm" name="submit">Submit</button>
+                <br />
+                <br />
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <table>
+            <tr>
+                <td>{{form.cash_deposited.as_hidden}}</td>
+                <td>{{form.electronic_checks_deposited.as_hidden}}</td>
+                <td>{{form.cc_amex_deposited.as_hidden}}</td>
+                <td>{{form.cc_discover_deposited.as_hidden}}</td>
+                <td>{{form.cc_mastercard_deposited.as_hidden}}</td>
+                <td>{{form.cc_visa_deposited.as_hidden}}</td>
+                <td>{{form.pnc_deposit_deposited.as_hidden}}</td>
+                <td>{{form.checks_deposited.as_hidden}}</td>
+                <td>{{form.eft_deposited.as_hidden}}</td>
+                <td>{{form.care_credit_deposited.as_hidden}}</td>
+                <td>{{form.lending_club_deposited.as_hidden}}</td>
+                <td>{{form.orthobanc_deposited.as_hidden}}</td>
+                <td>{{form.flips_deposited.as_hidden}}</td>
+                <td>{{form.web_cc_deposited.as_hidden}}</td>
+                <td>{{form.greensky_deposited.as_hidden}}</td>
+                <td>{{form.text2pay_deposited.as_hidden}}</td>
+                <td>{{form.other_deposited.as_hidden}}</td>
+
+            </tr>
+        </table>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let totalCollection = document.getElementById('id_total_daily_collections');
+
+
+    function calc() {
+        let total = 0;
+        let cash = document.getElementById('id_cash').value;
+        let elecChk = document.getElementById('id_electronic_checks').value;
+        let pncDeposit = document.getElementById('id_pnc_deposit').value
+        let checks = document.getElementById('id_checks').value
+        let amex = document.getElementById('id_cc_amex').value
+        let discover = document.getElementById('id_cc_discover').value
+        let mc = document.getElementById('id_cc_mastercard').value
+        let visa = document.getElementById('id_cc_visa').value
+        let webCC = document.getElementById('id_web_cc').value
+        let eft = document.getElementById('id_eft').value
+        let careCredit = document.getElementById('id_care_credit').value
+        let lendClub = document.getElementById('id_lending_club').value
+        let ortho = document.getElementById('id_orthobanc').value
+        let flips = document.getElementById('id_flips').value
+        let greensky = document.getElementById('id_greensky').value
+        let t2p = document.getElementById('id_text2pay').value
+        let other = document.getElementById('id_other').value
+
+        let money = [cash, elecChk, pncDeposit, checks, amex, discover, mc, visa, webCC, eft, careCredit, lendClub, ortho, flips, greensky, t2p, other]
+
+        for (let val of money) {
+            total += parseFloat(val)
+        }
+
+        totalCollection.value = parseFloat(total);
+
+    }
+</script>
+
+{% endblock content %}

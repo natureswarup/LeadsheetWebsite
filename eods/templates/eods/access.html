@@ -1,0 +1,19 @@
+{% extends 'eods/base.html' %}
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+
+
+<div class="container container-access">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h3>You do not have access to this location.</h3>
+            <a class="container-access-back-link" href="{% url 'eods:index' %}">Go Back</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

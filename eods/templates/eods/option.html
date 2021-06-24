@@ -1,0 +1,72 @@
+{% extends 'eods/base.html' %}
+{% block header %}
+
+<style>
+  .mybtn {
+    box-shadow: 0 2px 5px black;
+    transition: all .2s;
+  }
+
+  .mybtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1px 10px black;
+  }
+
+  .mybtn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 5px black;
+    outline: none;
+  }
+</style>
+
+<div class="container">
+  <div class="row text-left">
+    <div class="col-md-2">
+      <a href="{%url 'eods:index'%}">Back</a>
+    </div>
+  </div>
+
+</div>
+<br>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h1 style="color: #0b88ff;">{{office}}</h1>
+    </div>
+  </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<br>
+<br>
+<br>
+
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Create A Leadsheet</h4>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'eods:create_lead' office.id%}"><button type="button"
+            class="btn btn-lg btn-block btn-primary mybtn">Create</button></a>
+
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">View Leadsheets</h4>
+      </div>
+      <div class="card-body">
+        <a href="{% url 'eods:view_lead' office.id%}"><button type="button"
+            class="btn btn-lg btn-block btn-primary mybtn">View</button></a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock content %}

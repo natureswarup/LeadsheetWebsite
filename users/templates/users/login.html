@@ -1,0 +1,132 @@
+{% extends "eods/base.html" %}
+
+
+{% block content %}
+<style>
+    .page-container {
+        padding-top: 100px;
+    }
+
+    .login-container {
+        min-height: 300px;
+        width: 400px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 0px auto 0 auto;
+        background-color: white;
+        box-shadow: 0 1px 5px black;
+    }
+
+    .login-header {
+        height: 50px;
+        max-width: 100%;
+        background-color: #417690;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .login-header h4 {
+        color: #fff;
+        text-transform: capitalize;
+        font-size: larger;
+        font-weight: 400;
+    }
+
+    .login-body {
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .errors {
+        margin: 10px auto;
+        border: 1px solid red;
+        text-align: center;
+    }
+
+
+    .form form p {
+        margin: 5px;
+    }
+
+    label {
+        display: block;
+        font-size: 15px;
+        margin-left: 10px;
+
+    }
+
+    input {
+        border-radius: 5px;
+        width: 95%;
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        height: 35px;
+    }
+
+    .loginbtn {
+        padding: 10px;
+        display: block;
+        margin: 20px auto 5px auto;
+        color: #fff;
+        background-color: #417690;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .loginbtn:hover {
+        opacity: .8;
+        cursor: pointer;
+    }
+
+    /* to hide django auto error form */
+    .errorlist,
+    .nonfield {
+        display: none;
+    }
+
+    .fpass {
+        padding: 5px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="page-container">
+    <div class="login-container">
+        <div class="login-header">
+            <h4>Login to your account</h4>
+        </div>
+        <div class="login-body">
+            {% if form.errors %}
+            <div class="errors">
+                <p style="color: red;">Your username and password didn't match. Please try again.</p>
+            </div>
+            {% endif %}
+
+
+            <div class="form">
+
+                <form method="post" action="{% url 'users:login' %}" class="form">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <button name="submit" class="loginbtn">Log in</button>
+
+                    <input type="hidden" name="next" value="{% url 'eods:index' %}" />
+                    <a class="fpass" href="{% url 'users:password_reset' %}">Forgot password?</a>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

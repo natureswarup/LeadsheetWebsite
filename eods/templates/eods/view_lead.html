@@ -1,0 +1,300 @@
+{%extends 'eods/base.html' %} {% block header %} {% endblock header %}
+{%block content%} {% load humanizelib %}
+
+<style>
+  .table-main,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 5px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f7f7f7;
+  }
+
+  .deposited {
+    background-color: #ffff99;
+  }
+
+  .sent {
+    background-color: #faebd7;
+  }
+
+  .note>a {
+    color: #fa8072;
+  }
+
+  .myspanbutton>button {
+    margin-left: 10px;
+    margin-top: -5px;
+  }
+
+  h6 {
+    color: #2759d6;
+  }
+
+  tr.sticky th {
+    position: sticky !important;
+    /* position: -webkit-sticky !important; */
+    top: -.5% !important;
+    left: 0;
+
+    z-index: 100;
+  }
+
+  .report-table tr td {
+    border: none;
+    text-align: left;
+    color: #1b68ec;
+  }
+</style>
+
+<d iv class="container">
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h2><a href="{% url 'eods:option' office.id%}">{{office}}</a></h2>
+    </div>
+  </div>
+  </div>
+
+  <br />
+  <br />
+
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-sm-12">
+        <form action="/{{office.id}}/view_lead" method="post">
+          {%csrf_token%}
+          <!-- <span class="myspan">{{form1.month_view}}</span> -->
+          <span class="myspan">Start Date: &nbsp;{{form1.start_date}}&nbsp;</span>
+          <span class="myspan">End Date: &nbsp;{{form1.end_date}}&nbsp;</span>
+
+          <span class="myspanbutton"><button class="btn btn-primary btn-sm" name="submit">
+              Filter
+            </button></span>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+
+  <table class="table-sm thead-dark table-hover table-main" style="width: 100%">
+    <tr class="sticky">
+      <th>Date</th>
+      <th>Cash</th>
+      <th>Electronic Chk</th>
+      <th>PNC Deposit</th>
+      <th>Checks</th>
+      <th>CC Amex</th>
+      <th>Discover</th>
+      <th>CC Mastercard</th>
+      <th>CC Visa</th>
+      <th>CC Web</th>
+      <th>EFT</th>
+      <th>CareCredit</th>
+      <th>Lending Club</th>
+      <th>OrthoBanc</th>
+      <th>Flips</th>
+      <th>Greensky</th>
+      <th>TextToPay</th>
+      <th>Other</th>
+      <th>Leadsheet</th>
+    </tr>
+    {% if leadsheets%} {% for leadsheet in leadsheets%}
+    <tr>
+      {% if leadsheet.email_sent %}
+      <td class="sent">
+        <a href="/{{office.id}}/{{leadsheet.id}}">{{leadsheet.date_added}}</a>
+      </td>
+      {%else%}
+      <td>
+        <a href="/{{office.id}}/{{leadsheet.id}}">{{leadsheet.date_added}}</a>
+      </td>
+      {% endif %} {% if leadsheet.cash_deposited %}
+      <td class="deposited">{{leadsheet.cash|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.cash|intcomma}}</td>
+      {%endif%} {%if leadsheet.electronic_checks_deposited%}
+      <td class="deposited">{{leadsheet.electronic_checks|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.electronic_checks|intcomma}}</td>
+      {%endif%} {%if leadsheet.pnc_deposit_deposited%}
+      <td class="deposited">{{leadsheet.pnc_deposit|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.pnc_deposit|intcomma}}</td>
+      {%endif%} {%if leadsheet.checks_deposited%}
+      <td class="deposited">{{leadsheet.checks|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.checks|intcomma}}</td>
+      {%endif%} {%if leadsheet.cc_amex_deposited%}
+      <td class="deposited">{{leadsheet.cc_amex|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.cc_amex|intcomma}}</td>
+      {%endif%} {%if leadsheet.cc_discover_deposited%}
+      <td class="deposited">{{leadsheet.cc_discover|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.cc_discover|intcomma}}</td>
+      {%endif%} {%if leadsheet.cc_mastercard_deposited%}
+      <td class="deposited">{{leadsheet.cc_mastercard|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.cc_mastercard|intcomma}}</td>
+      {%endif%} {%if leadsheet.cc_visa_deposited%}
+      <td class="deposited">{{leadsheet.cc_visa|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.cc_visa|intcomma}}</td>
+      {%endif%} {%if leadsheet.web_cc_deposited%}
+      <td class="deposited">{{leadsheet.web_cc|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.web_cc|intcomma}}</td>
+      {%endif%} {%if leadsheet.eft_deposited%}
+      <td class="deposited">{{leadsheet.eft|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.eft|intcomma}}</td>
+      {%endif%} {%if leadsheet.care_credit_deposited%}
+      <td class="deposited">{{leadsheet.care_credit|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.care_credit|intcomma}}</td>
+      {%endif%} {%if leadsheet.lending_club_deposited%}
+      <td class="deposited">{{leadsheet.lending_club|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.lending_club|intcomma}}</td>
+      {%endif%} {%if leadsheet.orthobanc_deposited%}
+      <td class="deposited">{{leadsheet.orthobanc|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.orthobanc|intcomma}}</td>
+      {%endif%} {%if leadsheet.flips_deposited%}
+      <td class="deposited">{{leadsheet.flips|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.flips|intcomma}}</td>
+      {%endif%} {%if leadsheet.greensky_deposited%}
+      <td class="deposited">{{leadsheet.greensky|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.greensky|intcomma}}</td>
+      {%endif%} {%if leadsheet.text2pay_deposited%}
+      <td class="deposited">{{leadsheet.text2pay|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.text2pay|intcomma}}</td>
+      {%endif%} {%if leadsheet.other_deposited%}
+      <td class="deposited">{{leadsheet.other|intcomma}}</td>
+      {%else%}
+      <td>{{leadsheet.other|intcomma}}</td>
+      {%endif%}
+      <td>
+        <a href="{{leadsheet.file_upload.url}}" target="_blank">Download</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br />
+  <h3><strong> Total Collections: ${{total|intcomma}}</strong></h3>
+
+
+  <table class="report-table">
+    <tr>
+      <td>Cash:</td>
+      <td></td>
+      <td>${{cash|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Electronic Checks:</td>
+      <td></td>
+      <td>${{elecChk|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Amex:</td>
+      <td></td>
+      <td>${{amex|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Discover:</td>
+      <td></td>
+      <td>${{discover|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Mastercard:</td>
+      <td></td>
+      <td>${{mastercard|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Visa:</td>
+      <td></td>
+      <td>${{visa|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Web CC:</td>
+      <td></td>
+      <td>${{webcc|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>PNC Deposit:</td>
+      <td></td>
+      <td>${{pnc|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Checks:</td>
+      <td></td>
+      <td>${{checks|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>EFT:</td>
+      <td></td>
+      <td>${{eft|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>CareCredit:</td>
+      <td></td>
+      <td>${{carecredit|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Lending Club:</td>
+      <td></td>
+      <td>${{lending|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>OrthoBanc:</td>
+      <td></td>
+      <td>${{ortho|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Flips:</td>
+      <td></td>
+      <td>${{flips|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Greensky:</td>
+      <td></td>
+      <td>${{greensky|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Text To Pay:</td>
+      <td></td>
+      <td>${{t2p|intcomma}}</td>
+    </tr>
+    <tr>
+      <td>Other:</td>
+      <td></td>
+      <td>${{other|intcomma}}</td>
+    </tr>
+  </table>
+
+
+
+
+  {%else%}
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+
+        <p style="color: red;">There are no leadsheets in the specified timeframe.</p>
+      </div>
+    </div>
+  </div>
+  {%endif%} {% endblock content %}

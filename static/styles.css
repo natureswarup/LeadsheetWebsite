@@ -1,0 +1,117 @@
+/* ----------BASE-------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* background-color: #f8f8f8; */
+}
+
+h1,
+h2,
+h3,
+h4,
+a {
+  color: #2759e0;
+}
+
+.mynav {
+  height: 70px;
+}
+
+.title-container {
+  /* margin: 0 auto; */
+  text-align: center;
+  /* border: 1px solid white; */
+  width: 100%;
+}
+
+.title {
+  display: inline-block;
+  color: white;
+  font-size: 40px;
+  font-weight: 900;
+  transform: skewX(-10deg);
+  letter-spacing: 10px;
+}
+
+.title:hover {
+  text-decoration: none;
+}
+
+.navdiv {
+  position: relative;
+}
+
+.rootdiv {
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.greeting {
+  position: absolute;
+  right: 0;
+}
+
+/* ----------BASE-------- */
+
+/* -----INDEX-------- */
+.container-index {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.container-index h2 {
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.container-index select {
+  width: 500px;
+  height: 40px;
+}
+
+.container-index select option a:hover {
+  color: red;
+}
+
+/* -----INDEX-------- */
+
+/* -----ACESS PAGE-------- */
+
+.container-access {
+  padding-top: 50px;
+}
+
+.container-access-back-link {
+  display: inline-block;
+  background-color: royalblue;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 40px;
+}
+
+.container-access-back-link:hover {
+  text-decoration: none;
+  opacity: 0.9;
+  color: white;
+}
+
+/* -----ACESS PAGE-------- */
+
+/* -----CREATE LEAD-------- */
+.create-form {
+  border: 1px solid black;
+  max-width: 60%;
+  min-width: 1000px;
+  margin: 10px auto;
+  box-shadow: 0 2px 20px black;
+  border-radius: 10px;
+  background-color: white;
+}
+
+/* -----CREATE LEAD-------- */

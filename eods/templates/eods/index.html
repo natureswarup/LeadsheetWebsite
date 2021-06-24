@@ -1,0 +1,223 @@
+{% extends 'eods/base.html' %} {% block header %} {% load humanizelib %}
+
+<style>
+  .download {
+    margin-top: 20px;
+
+    position: relative;
+  }
+
+  .download a {
+    position: absolute;
+    top: 0;
+    right: 15%;
+  }
+
+  .totals-table {
+    margin: 50px auto;
+    margin-bottom: 0;
+
+  }
+
+  th {
+    background-color: #ceccccf8;
+
+  }
+
+  .sticky th {
+    position: sticky;
+    top: -1px;
+    border: 1px solid black;
+    z-index: 10;
+  }
+
+  tr,
+  th,
+  td {
+    border: 1px solid black;
+    padding: 5px;
+    /* text-align: center; */
+  }
+
+  tr:hover {
+    background-color: rgb(250, 238, 221);
+
+  }
+
+  .na {
+    background-color: rgba(147, 112, 216, 0.281);
+
+  }
+</style>
+
+
+<div class="container-index">
+
+  <h2>Select An Office:</h2>
+
+  <select name="do" id="do" onchange="location = this.value">
+    <option value="">Click to see offices</option>
+    {% for office in offices %}
+    <option value="{% url 'eods:option' office.id %}"><a class="offices">{{office}}</a></option>
+    {% endfor %}
+  </select>
+</div>
+
+{% if request.user.is_admin %}
+<div class="download">
+  <a href="{% url 'eods:csv_download' %}">Download Data</a>
+</div>
+<table class="totals-table">
+  <tr class="sticky">
+    <th>Office</th>
+    {% for day in days %}
+    <th>{{day}}</th>
+    {% endfor %}
+    <!-- <th>{{yesterday}}</th>
+    <th id="test">{{two_days}}</th> -->
+  </tr>
+
+
+  {% for info in info_lst %}
+  <tr id="data-rows">
+    <td class="name"><a href="{% url 'eods:option' info.name.id %}">{{info.name}}</a></td>
+    {% if info.yesterday or info.yesterday == 0 %}
+    <td class="yesterday">${{info.yesterday|intcomma}}</td>
+    {% else %}
+    <td class="na yesterday">N/A</td>
+    {%endif%}
+    {% if info.two_days or info.two_days == 0 %}
+    <td class="two_days">${{info.two_days|intcomma}}</td>
+    {% else %}
+    <td class="na two_days">N/A</td>
+    {%endif%}
+    {% if info.three_days or info.three_days == 0 %}
+    <td class="three_days">${{info.three_days|intcomma}}</td>
+    {% else %}
+    <td class="na three_days">N/A</td>
+    {%endif%}
+    {% if info.four_days or info.four_days == 0 %}
+    <td class="four_days">${{info.four_days|intcomma}}</td>
+    {% else %}
+    <td class="na four_days">N/A</td>
+    {%endif%}
+    {% if info.five_days or info.five_days == 0 %}
+    <td class="five_days">${{info.five_days|intcomma}}</td>
+    {% else %}
+    <td class="na five_days">N/A</td>
+    {%endif%}
+    {% if info.six_days or info.six_days == 0 %}
+    <td class="six_days">${{info.six_days|intcomma}}</td>
+    {% else %}
+    <td class="na six_days">N/A</td>
+    {%endif%}
+    {% if info.seven_days or info.seven_days == 0 %}
+    <td class="seven_days">${{info.seven_days|intcomma}}</td>
+    {% else %}
+    <td class="na seven_days">N/A</td>
+    {%endif%}
+    {% if info.eight_days or info.eight_days == 0 %}
+    <td class="eight_days">${{info.eight_days|intcomma}}</td>
+    {% else %}
+    <td class="na eight_days">N/A</td>
+    {%endif%}
+    {% if info.nine_days or info.nine_days == 0 %}
+    <td class="nine_days">${{info.nine_days|intcomma}}</td>
+    {% else %}
+    <td class="na nine_days">N/A</td>
+    {%endif%}
+    {% if info.ten_days or info.ten_days == 0 %}
+    <td class="ten_days">${{info.ten_days|intcomma}}</td>
+    {% else %}
+    <td class="na ten_days">N/A</td>
+    {%endif%}
+
+    <!-- <td>{{office.leadsheet_set.all.last.total}}</td> -->
+
+  </tr>
+  {% endfor %}
+  <tr>
+    <td><strong> Totals:</strong></td>
+    <td style="color: red;"><strong>${{total_yesterday|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_two_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_three_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_four_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_five_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_six_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_seven_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_eight_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_nine_days|intcomma}}</strong></td>
+    <td style="color: red;"><strong>${{total_ten_days|intcomma}}</strong></td>
+  </tr>
+</table>
+
+{%endif%}
+
+<br>
+<br>
+<br>
+
+<script>
+  // names = document.getElementsByClassName('name')
+  // yesterdays = document.getElementsByClassName('yesterday')
+  // twoDays = document.getElementsByClassName('two_days')
+  // threeDays = document.getElementsByClassName('three_days')
+  // fourDays = document.getElementsByClassName('four_days')
+  // fiveDays = document.getElementsByClassName('five_days')
+  // officeNames = [].slice.apply(names)
+  // officeYesterdays = [].slice.apply(yesterdays)
+  // officeTwoDays = [].slice.apply(twoDays)
+  // officeThreeDays = [].slice.apply(threeDays)
+  // officeFourDays = [].slice.apply(fourDays)
+  // officeFiveDays = [].slice.apply(fiveDays)
+  // let items = []
+  // count = 0
+  // for (let i = 0; i < names.length; i++) {
+  //   let name = officeNames[i].innerHTML
+  //   let yesterday = officeYesterdays[i].innerHTML
+  //   let twoDay = officeTwoDays[i].innerHTML
+  //   let threeDay = officeThreeDays[i].innerHTML
+  //   let fourDay = officeFourDays[i].innerHTML
+  //   let fiveDay = officeFiveDays[i].innerHTML
+
+  //   let obj = { name: name, yesterday: parseFloat(yesterday.replace(/[$,]/gi, '')), two_day: parseFloat(twoDay.replace(/[$,]/gi, '')), three_day: parseFloat(threeDay.replace(/[$,]/gi, '')), four_day: parseFloat(fourDay.replace(/[$,]/gi, '')), five_day: parseFloat(fiveDay.replace(/[$,]/gi, '')) }
+  //   items.push(obj)
+  // }
+
+
+
+
+  // for (item of items) {
+  //   for (key in item) {
+  //     if (typeof (item[key]) === typeof (NaN)) {
+  //       if (item[key] > 0) {
+  //         continue
+  //       } else {
+
+  //         item[key] = 0
+  //       }
+
+  //     }
+
+  //   }
+  // }
+
+
+
+  // let test = document.getElementById('test')
+
+  // test.addEventListener('click', (() => {
+  //   console.log(items.sort(function (a, b) {
+  //     return b.two_day - a.two_day
+  //   }
+  //   ));
+  // }))
+
+
+
+</script>
+
+
+
+
+{% endblock header %}

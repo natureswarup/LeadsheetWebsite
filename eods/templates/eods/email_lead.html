@@ -1,0 +1,31 @@
+{% extends 'eods/base.html' %} {% block header %} {% endblock header %}
+{%block content %}
+
+<style>
+  label {
+    display: none;
+  }
+
+  h3 {
+    margin-top: 100px;
+  }
+
+  #id_message {
+
+    width: 100%;
+  }
+</style>
+
+<form action="" method="POST">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h3>Email the Office:</h3>
+        {%csrf_token%} {{email_form.as_p}}
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{%endblock content%}

@@ -1,0 +1,6 @@
+uploads/*
+sendmail/*
+leadsheets/settings.py
+manage.py
+db.sqlite3
+pdfs
