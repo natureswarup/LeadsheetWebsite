@@ -19,15 +19,12 @@ class LeadsheetForm(forms.ModelForm):
 
 
 class Dateform(forms.Form):
-    # start_date = forms.DateField(
-    #     widget=forms.SelectDateWidget(years=range(2020, 2023)))
-    # end_date = forms.DateField(
-    #     widget=forms.SelectDateWidget(years=range(2020, 2023),))
+
     start_date = forms.DateField(widget=forms.DateInput(
         attrs={'placeholder': 'MM/DD/YYYY'}))
     end_date = forms.DateField(widget=forms.DateInput(
         attrs={'placeholder': 'MM/DD/YYYY'}))
-    # month_view = forms.CharField(label='Sort by month', widget=forms.Select(choices=MONTH_CHOICES))
+
 
 
 class ContactForm(forms.ModelForm):

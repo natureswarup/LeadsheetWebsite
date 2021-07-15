@@ -37,30 +37,6 @@ ten_days = (datetime.datetime.today() -
 
 
 def index(request):
-    date = datetime.datetime.now()
-    offices = Office.objects.all().order_by('name')
-    previous_date = datetime.datetime.today() - datetime.timedelta(days=1)
-    hour_of_day = int(date.strftime("%H"))
-    yesterday = (datetime.datetime.today() -
-                 datetime.timedelta(days=1)).strftime('%Y-%m-%d')
-    two_days = (datetime.datetime.today() -
-                datetime.timedelta(days=2)).strftime('%Y-%m-%d')
-    three_days = (datetime.datetime.today() -
-                  datetime.timedelta(days=3)).strftime('%Y-%m-%d')
-    four_days = (datetime.datetime.today() -
-                 datetime.timedelta(days=4)).strftime('%Y-%m-%d')
-    five_days = (datetime.datetime.today() -
-                 datetime.timedelta(days=5)).strftime('%Y-%m-%d')
-    six_days = (datetime.datetime.today() -
-                datetime.timedelta(days=6)).strftime('%Y-%m-%d')
-    seven_days = (datetime.datetime.today() -
-                  datetime.timedelta(days=7)).strftime('%Y-%m-%d')
-    eight_days = (datetime.datetime.today() -
-                  datetime.timedelta(days=8)).strftime('%Y-%m-%d')
-    nine_days = (datetime.datetime.today() -
-                 datetime.timedelta(days=9)).strftime('%Y-%m-%d')
-    ten_days = (datetime.datetime.today() -
-                datetime.timedelta(days=10)).strftime('%Y-%m-%d')
     days = [yesterday, two_days, three_days, four_days, five_days,
             six_days, seven_days, eight_days, nine_days, ten_days]
     info_lst = []
@@ -151,7 +127,7 @@ def index(request):
 
     return render(request, 'eods/index.html', context)
 
-
+# Choose whether to create or view a leadsheet
 @login_required(login_url='/users/login/')
 def option(request, office_id):
     office = Office.objects.get(pk=office_id)
@@ -418,27 +394,6 @@ def review_lead(request, office_id):
 
 
 def csv_download(request):
-    yesterday = (datetime.datetime.today() -
-                 datetime.timedelta(days=1)).strftime('%Y-%m-%d')
-    two_days = (datetime.datetime.today() -
-                datetime.timedelta(days=2)).strftime('%Y-%m-%d')
-    three_days = (datetime.datetime.today() -
-                  datetime.timedelta(days=3)).strftime('%Y-%m-%d')
-    four_days = (datetime.datetime.today() -
-                 datetime.timedelta(days=4)).strftime('%Y-%m-%d')
-    five_days = (datetime.datetime.today() -
-                 datetime.timedelta(days=5)).strftime('%Y-%m-%d')
-    six_days = (datetime.datetime.today() -
-                datetime.timedelta(days=6)).strftime('%Y-%m-%d')
-    seven_days = (datetime.datetime.today() -
-                  datetime.timedelta(days=7)).strftime('%Y-%m-%d')
-    eight_days = (datetime.datetime.today() -
-                  datetime.timedelta(days=8)).strftime('%Y-%m-%d')
-    nine_days = (datetime.datetime.today() -
-                 datetime.timedelta(days=9)).strftime('%Y-%m-%d')
-    ten_days = (datetime.datetime.today() -
-                datetime.timedelta(days=10)).strftime('%Y-%m-%d')
-
     response = HttpResponse(content_type='text/csv')
     response["Content-Disposition"] = 'attachment; filename="OfficeTotals.csv"'
 
