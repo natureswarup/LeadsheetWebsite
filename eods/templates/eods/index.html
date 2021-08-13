@@ -1,24 +1,6 @@
 {% extends 'eods/base.html' %} {% block header %} {% load humanizelib %}
 
 <style>
-  .download {
-    margin-top: 20px;
-
-    position: relative;
-  }
-
-  .download a {
-    position: absolute;
-    top: 0;
-    right: 15%;
-  }
-
-  .totals-table {
-    margin: 50px auto;
-    margin-bottom: 0;
-
-  }
-
   th {
     background-color: #ceccccf8;
 
@@ -36,16 +18,10 @@
   td {
     border: 1px solid black;
     padding: 5px;
-    /* text-align: center; */
   }
 
   tr:hover {
     background-color: rgb(250, 238, 221);
-
-  }
-
-  .na {
-    background-color: rgba(147, 112, 216, 0.281);
 
   }
 </style>
@@ -73,8 +49,6 @@
     {% for day in days %}
     <th>{{day}}</th>
     {% endfor %}
-    <!-- <th>{{yesterday}}</th>
-    <th id="test">{{two_days}}</th> -->
   </tr>
 
 
@@ -157,65 +131,7 @@
 <br>
 <br>
 
-<script>
-  // names = document.getElementsByClassName('name')
-  // yesterdays = document.getElementsByClassName('yesterday')
-  // twoDays = document.getElementsByClassName('two_days')
-  // threeDays = document.getElementsByClassName('three_days')
-  // fourDays = document.getElementsByClassName('four_days')
-  // fiveDays = document.getElementsByClassName('five_days')
-  // officeNames = [].slice.apply(names)
-  // officeYesterdays = [].slice.apply(yesterdays)
-  // officeTwoDays = [].slice.apply(twoDays)
-  // officeThreeDays = [].slice.apply(threeDays)
-  // officeFourDays = [].slice.apply(fourDays)
-  // officeFiveDays = [].slice.apply(fiveDays)
-  // let items = []
-  // count = 0
-  // for (let i = 0; i < names.length; i++) {
-  //   let name = officeNames[i].innerHTML
-  //   let yesterday = officeYesterdays[i].innerHTML
-  //   let twoDay = officeTwoDays[i].innerHTML
-  //   let threeDay = officeThreeDays[i].innerHTML
-  //   let fourDay = officeFourDays[i].innerHTML
-  //   let fiveDay = officeFiveDays[i].innerHTML
 
-  //   let obj = { name: name, yesterday: parseFloat(yesterday.replace(/[$,]/gi, '')), two_day: parseFloat(twoDay.replace(/[$,]/gi, '')), three_day: parseFloat(threeDay.replace(/[$,]/gi, '')), four_day: parseFloat(fourDay.replace(/[$,]/gi, '')), five_day: parseFloat(fiveDay.replace(/[$,]/gi, '')) }
-  //   items.push(obj)
-  // }
-
-
-
-
-  // for (item of items) {
-  //   for (key in item) {
-  //     if (typeof (item[key]) === typeof (NaN)) {
-  //       if (item[key] > 0) {
-  //         continue
-  //       } else {
-
-  //         item[key] = 0
-  //       }
-
-  //     }
-
-  //   }
-  // }
-
-
-
-  // let test = document.getElementById('test')
-
-  // test.addEventListener('click', (() => {
-  //   console.log(items.sort(function (a, b) {
-  //     return b.two_day - a.two_day
-  //   }
-  //   ));
-  // }))
-
-
-
-</script>
 
 
 

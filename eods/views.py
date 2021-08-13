@@ -37,6 +37,7 @@ ten_days = (datetime.datetime.today() -
 
 
 def index(request):
+    offices = Office.objects.all().order_by('name')
     days = [yesterday, two_days, three_days, four_days, five_days,
             six_days, seven_days, eight_days, nine_days, ten_days]
     info_lst = []
@@ -99,7 +100,7 @@ def index(request):
             receipients = []
             subject = f'Reminder: Please submit your leadsheet for {leadsheet_date} to accounting'
             message = 'Please log into the leadsheet website and submit your financials.'
-            sender = 'capstone.leadsheets@gmail.com'
+            sender = 'email goes here'
             for office in offices:
                 if office.leadsheet_set.all().first():
                     if previous_date.strftime('%Y-%m-%d') <= office.leadsheet_set.all().last().date_added.strftime("%Y-%m-%d"):
@@ -303,7 +304,7 @@ def email_lead(request, office_id, leadsheet_id):
         # sent_from = email_form.cleaned_data['sent_from']
         message = email_form['message'].value()
         email = EmailMessage(subject='LEADSHEET ADJUSTMENT MADE - DO NOT REPLY TO THIS EMAIL',
-                             body=message, from_email='capstone.leadsheets@gmail.com', to=(office.email,))
+                             body=message, from_email='email goes here', to=(office.email,))
         email_form.save()
         email.send(fail_silently=False)
 

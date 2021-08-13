@@ -13,49 +13,6 @@
     padding: 5px;
     text-align: center;
   }
-
-  .edit-header {
-    margin-top: 40px;
-  }
-
-
-
-  .accounting {
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-  }
-
-  .accounting h4 {
-    margin: 0 auto;
-    color: red;
-  }
-
-
-
-  .email-link {
-    margin-top: 20px;
-    background-color: silver;
-    display: inline-block;
-    width: 150px;
-    text-align: center;
-    padding: 5px;
-  }
-
-  .back-link {
-    display: inline-block;
-    background-color: royalblue;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 40px;
-  }
-
-  .back-link:hover {
-    text-decoration: none;
-    opacity: .9;
-    color: white;
-  }
 </style>
 
 {% if request.user.is_admin %}
@@ -94,28 +51,29 @@
       <div class="col-md-2"></div>
 
       <div class="col-md-4 input-container1">
-        <p><span class="labels">Cash:</span> {{form.cash}} {{form.cash_deposited}}</p>
-        <p><span class="labels">Electronic Chks:</span> {{form.electronic_checks}} {{form.electronic_checks_deposited}}
-        </p>
-        <p><span class="labels">PNC Deposit:</span>{{form.pnc_deposit}} {{form.pnc_deposit_deposited}}</p>
-        <p><span class="labels">Checks:</span>{{form.checks}} {{form.checks_deposited}}</p>
-        <p><span class="labels">CC Amex:</span>{{form.cc_amex}} {{form.cc_amex_deposited}}</p>
-        <p><span class="labels">CC Discover:</span>{{form.cc_discover}} {{form.cc_discover_deposited}}</p>
-        <p><span class="labels">CC Mastercard:</span>{{form.cc_mastercard}} {{form.cc_mastercard_deposited}}</p>
-        <p><span class="labels">CC Visa:</span>{{form.cc_visa}} {{form.cc_visa_deposited}}</p>
-        <p><span class="labels">CC Web:</span>{{form.web_cc}} {{form.web_cc_deposited}}</p>
+        <div><span class="eLabels">Cash:</span> {{form.cash}} {{form.cash_deposited}}</div>
+        <div><span class="eLabels">Electronic Chks:</span> {{form.electronic_checks}}
+          {{form.electronic_checks_deposited}}
+        </div>
+        <div><span class="eLabels">PNC Deposit:</span>{{form.pnc_deposit}} {{form.pnc_deposit_deposited}}</div>
+        <div><span class="eLabels">Checks:</span>{{form.checks}} {{form.checks_deposited}}</div>
+        <div><span class="eLabels">CC Amex:</span>{{form.cc_amex}} {{form.cc_amex_deposited}}</div>
+        <div><span class="eLabels">CC Discover:</span>{{form.cc_discover}} {{form.cc_discover_deposited}}</div>
+        <div><span class="eLabels">CC Mastercard:</span>{{form.cc_mastercard}} {{form.cc_mastercard_deposited}}</div>
+        <div><span class="eLabels">CC Visa:</span>{{form.cc_visa}} {{form.cc_visa_deposited}}</div>
+        <div><span class="eLabels">CC Web:</span>{{form.web_cc}} {{form.web_cc_deposited}}</div>
       </div>
 
       <div class="col-md-4 input-container2">
-        <p><span class="labels">EFT: </span>{{form.eft}} {{form.eft_deposited}}</p>
-        <p><span class="labels">CareCredit: </span>{{form.care_credit}} {{form.care_credit_deposited}}</p>
-        <p><span class="labels">Lending Club: </span>{{form.lending_club}} {{form.lending_club_deposited}}</p>
-        <p><span class="labels">OrthoBanc: </span>{{form.orthobanc}} {{form.orthobanc_deposited}}</p>
-        <p><span class="labels">Flips:</span> {{form.flips}} {{form.flips_deposited}}</p>
-        <p><span class="labels">Greensky: </span>{{form.greensky}} {{form.greensky_deposited}}</p>
-        <p><span class="labels">Text to Pay: </span>{{form.text2pay}} {{form.text2pay_deposited}}</p>
-        <p><span class="labels">Other: </span>{{form.other}} {{form.other_deposited}}</p>
-        <p class="refund-note"><span class="labels">Refunds: Must be processed by Accounting</span></p>
+        <div><span class="eLabels">EFT: </span>{{form.eft}} {{form.eft_deposited}}</div>
+        <div><span class="eLabels">CareCredit: </span>{{form.care_credit}} {{form.care_credit_deposited}}</div>
+        <div><span class="eLabels">Lending Club: </span>{{form.lending_club}} {{form.lending_club_deposited}}</div>
+        <div><span class="eLabels">OrthoBanc: </span>{{form.orthobanc}} {{form.orthobanc_deposited}}</div>
+        <div><span class="eLabels">Flips:</span> {{form.flips}} {{form.flips_deposited}}</div>
+        <div><span class="eLabels">Greensky: </span>{{form.greensky}} {{form.greensky_deposited}}</div>
+        <div><span class="eLabels">Text to Pay: </span>{{form.text2pay}} {{form.text2pay_deposited}}</div>
+        <div><span class="eLabels">Other: </span>{{form.other}} {{form.other_deposited}}</div>
+        <div class="refund-note"><span class="eLabels">Refunds: Must be processed by Accounting</span></div>
         <br>
         <br>
       </div>
@@ -125,13 +83,13 @@
     <div class="container-fluid">
       <div class="row text-center">
 
-        <div class="col-md-12">
+        <div class="col-md-12 totals">
           <p class="TDC">Total Daily Collections: {{form.total_daily_collections}}</p>
           <p>Notes: </p>
           <p>{{form.note}}</p>
           <br>
           <br>
-          <button class="btn btn-primary btn-lg" name="submit">Save</button>
+          <button class="btn btn-primary btn-lg btnSubmit" name="submit">Save</button>
 
           <br>
           <br>
